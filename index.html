@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script type="text/javascript" src='https://d3js.org/d3.v4.min.js'></script>
+		
+		<style type="text/css">
+
+			@font-face { font-family: 'DoHyeon'; src: url('DoHyeon.ttf'); }
+
+			body{
+				margin: 0px;
+				/*background-image: url("space.png");
+				background-position: center;
+    			background-repeat: no-repeat;
+    			background-size: cover;*/
+    			background-color: #212339;
+
+			}
+
+			.label{
+				font-family: 'DoHyeon';
+				fill: white;
+				text-anchor: middle;;
+				/*text-shadow: 5px 5px 100px black;*/
+			}
+
+			svg{
+				padding: 20px;
+
+			}
+
+			.object{
+				transform-origin: 50% 50%;
+
+			}
+
+			.scaleLine{
+				stroke: white;
+				stroke-width: 3px;
+				stroke-linecap: square;
+			}
+
+
+
+			
+		</style>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+
+
+			var svgW = window.innerWidth-40, svgH = window.innerHeight-40;
+
+
+			var svg = d3.select('body').append('svg')
+				.attr('width', svgW)
+				.attr('height', svgH)
+
+
+			var x = d3.scaleLinear().range([0, svgW]);
+
+			x.domain([0, 4000000])
+
+			
+
+			var theSunSize = 1391000
+			var jupiterSize = 143000
+			var saturnSize = 120500
+			var neptuneSize = 49500
+			var earthSize = 12800
+			var venusSize = 12100
+			var marsSize = 6800
+			var mercurySize = 4900
+			var plutoSize = 2400
+
+
+			var pluto = svg.append('png:image')
+				.attr('class', 'object')
+				.attr('xlink:href', 'pluto.png')
+				.attr('width', x(plutoSize))
+				.attr('x', svgW/2-x(plutoSize/2))
+				.attr('y', svgH/2-x(plutoSize/2))
+				.attr('opacity', 0)
+
+			var mercury = svg.append('png:image')
+				.attr('class', 'object')
+				.attr('xlink:href', 'mercury.png')
+				.attr('width', x(mercurySize))
+				.attr('x', svgW/2-x(mercurySize/2))
+				.attr('y', svgH/2-x(mercurySize/2))
+				.attr('opacity', 0)
+
+			var mars = svg.append('png:image')
+				.attr('class', 'object')
+				.attr('xlink:href', 'mars.png')
+				.attr('width', x(marsSize))
+				.attr('x', svgW/2-x(marsSize/2))
+				.attr('y', svgH/2-x(marsSize/2))
+				.attr('opacity', 0)
+
+			var venus = svg.append('png:image')
+				.attr('class', 'object')
+				.attr('xlink:href', 'venus.png')
+				.attr('width', x(venusSize))
+				.attr('x', svgW/2-x(venusSize/2))
+				.attr('y', svgH/2-x(venusSize/2))
+				.attr('opacity', 0)
+
+			var earth = svg.append('png:image')
+				.attr('class', 'object')
+				.attr('xlink:href', 'earth.png')
+				.attr('width', x(earthSize))
+				.attr('x', svgW/2-x(earthSize/2))
+				.attr('y', svgH/2-x(earthSize/2))
+				.attr('opacity', 0)
+
+			var neptune = svg.append('png:image')
+				.attr('class', 'object')
+				.attr('xlink:href', 'neptune.png')
+				.attr('width', x(neptuneSize))
+				.attr('x', svgW/2-x(neptuneSize/2))
+				.attr('y', svgH/2-x(neptuneSize/2))
+				.attr('opacity', 0)
+
+			var saturn = svg.append('png:image')
+				.attr('class', 'object')
+				.attr('xlink:href', 'saturn.png')
+				.attr('width', x(saturnSize))
+				.attr('x', svgW/2-x(saturnSize/2))
+				.attr('y', svgH/2-x(saturnSize/2))
+				.attr('opacity', 0)
+
+			var jupiter = svg.append('png:image')
+				.attr('class', 'object')
+				.attr('xlink:href', 'jupiter.png')
+				.attr('width', x(jupiterSize))
+				.attr('x', svgW/2-x(jupiterSize/2))
+				.attr('y', svgH/2-x(jupiterSize/2))
+				.attr('opacity', 0)
+
+			var theSun = svg.append('png:image')
+				.attr('class', 'object')
+				.attr('xlink:href', 'theSun.png')
+				.attr('width', x(theSunSize))
+				.attr('x', svgW/2-x(theSunSize/2))
+				.attr('y', svgH/2-x(theSunSize/2))
+				.attr('opacity', 0)
+
+			var label = svg.append('text')
+				.attr('class', 'label')				
+				.attr('x', svgW/2)
+				.attr('y', 35)
+				.attr('font-size', 40)
+
+			var label2 = svg.append('text')
+				.attr('class', 'label')				
+				.attr('x', svgW/2)
+				.attr('y', svgH-15)
+				.attr('font-size', 20)
+				
+
+			var scaleLine = svg.append('line')
+				.attr('x1', svgW/2 - x(theSunSize/2))
+				.attr('x2', svgW/2 + x(theSunSize/2))
+				.attr('y1', svgH - 5)
+				.attr('y2', svgH - 5)
+				.attr('class', 'scaleLine')
+
+			var scaleLineCap = svg.append('line')
+				.attr('x1', svgW/2 + x(theSunSize/2))
+				.attr('x2', svgW/2 + x(theSunSize/2))
+				.attr('y1', svgH - 5)
+				.attr('y2', svgH - 25)
+				.attr('class', 'scaleLine')
+
+			var scaleLineCap2 = svg.append('line')
+				.attr('x1', svgW/2 - x(theSunSize/2))
+				.attr('x2', svgW/2 - x(theSunSize/2))
+				.attr('y1', svgH - 5)
+				.attr('y2', svgH - 25)
+				.attr('class', 'scaleLine')
+
+
+
+			var zoom = d3.zoom()
+				.scaleExtent([1.2, 750])
+				.translateExtent([[0, 0], [svgW, svgH]])
+				.on('zoom', zoomed);
+
+			zoom.scaleTo(svg, 130);
+
+			svg.call(zoom);
+
+
+			function zoomed(){
+
+				var transform = d3.event.transform;
+				var zoomLevel = transform.k
+				
+				transform.x = 0;
+				transform.y = 0;
+
+				var xNew = transform.rescaleX(x);
+
+
+
+				function switchScale(planetSize, planetLabel){
+					var formatComma = d3.format(",")
+					scaleLine
+						.attr('x1', svgW/2 - xNew(planetSize/2))
+						.attr('x2', svgW/2 + xNew(planetSize/2));
+					label2
+						.text(formatComma(planetSize) + ' km');
+					label
+						.text(planetLabel);
+
+					scaleLineCap
+						.attr('x1', svgW/2 + xNew(planetSize/2))
+						.attr('x2', svgW/2 + xNew(planetSize/2))
+					scaleLineCap2
+						.attr('x1', svgW/2 - xNew(planetSize/2))
+						.attr('x2', svgW/2 - xNew(planetSize/2))
+				}
+
+
+
+				
+				theSun.attr('transform', transform.toString());
+				jupiter.attr('transform', transform.toString());
+				saturn.attr('transform', transform.toString());
+				neptune.attr('transform', transform.toString());
+				earth.attr('transform', transform.toString());
+				venus.attr('transform', transform.toString());
+				mars.attr('transform', transform.toString());
+				mercury.attr('transform', transform.toString());
+				pluto.attr('transform', transform.toString());
+
+
+				function fade(object, zeroOne){
+					
+					object
+	
+					.transition()
+					.ease(d3.easeLinear)
+					.attr('opacity',  zeroOne)
+					
+				}
+
+
+
+				console.log(zoomLevel)
+
+				
+				if (zoomLevel > 630){
+					fade(pluto, 1)
+					fade(mercury, 0)
+					switchScale(plutoSize, 'PLUTO')
+				}
+				else if (zoomLevel > 350){
+					fade(pluto, 0)
+					fade(mercury, 1)
+					fade(mars, 0)
+					switchScale(mercurySize, 'MERCURY')
+				}
+				else if (zoomLevel > 250){
+					fade(mercury, 0)
+					fade(mars, 1)
+					fade(venus, 0)
+					switchScale(marsSize, 'MARS')
+				}
+				else if (zoomLevel > 140){
+					fade(mars, 0)
+					fade(venus, 1)
+					fade(earth, 0)
+					switchScale(venusSize, 'VENUS')
+				}
+				else if (zoomLevel > 80){
+					fade(venus, 0)
+					fade(earth, 1)
+					fade(neptune, 0)
+					switchScale(earthSize, 'EARTH')
+				}
+				else if (zoomLevel > 30){
+					fade(earth, 0)
+					fade(neptune, 1)
+					fade(saturn, 0)
+					switchScale(neptuneSize, 'NEPTUNE')
+				}
+				else if (zoomLevel > 13){
+					fade(neptune, 0)
+					fade(saturn, 1)
+					fade(jupiter, 0)
+					switchScale(saturnSize, 'SATURN')
+				}
+				else if (zoomLevel > 2.9){
+					fade(saturn, 0)
+					fade(jupiter, 1)
+					fade(theSun, 0)
+					switchScale(jupiterSize, 'JUPITER')
+				}
+				else if (zoomLevel > 1){
+					fade(jupiter, 0)
+					fade(theSun, 1)
+					switchScale(theSunSize, 'THE SUN')
+				}
+			}
+
+
+		</script>
+	</body>	
+</html>
+
+
+
+
